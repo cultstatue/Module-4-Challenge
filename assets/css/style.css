@@ -11,7 +11,7 @@
     --colorone: #FAF2FF;
     --colortwo: #5A207F;
     --colorthree: #FEFBFF;
-    --compliment: #FCDDAA;
+    --compliment: #FCF8FD;   
     --compliment2: #F3B144;    
 
   }
@@ -36,9 +36,8 @@ header {
 header h1 {
 
     padding: 10px;
-    font-weight: normal;
-    font-size: 3.5vh;
-    text-shadow: 1px 1px #5A207F;
+    font-weight: lighter;
+    font-size: 3.9vh;
 
 }
 
@@ -63,6 +62,7 @@ header h1 {
     border-radius: 20px;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
     padding: 15px;
+    border-bottom: 5px solid var(--compliment2);
 
 }
 
@@ -71,6 +71,7 @@ header h1 {
     display: flex;
     flex: wrap;
     justify-content: space-between;
+    border-bottom: 3px solid var(--compliment2);
     
 }
 
@@ -96,8 +97,9 @@ header h1 {
     padding: 15px;
     flex: 1;
     line-height: 40px;
-    font-weight: lighter;
+    font-weight: normal;
     font-size: 2.3vh;
+    border-bottom: 3px solid var(--compliment2);
 
 }
 
@@ -107,7 +109,7 @@ header h1 {
     flex-wrap: wrap;
     list-style: none;
     flex: 100%;
-    margin-top: 30px;
+    padding: 20px 0;
 
 }
 
@@ -115,19 +117,29 @@ header h1 {
 
     flex:0 1 calc(50% - 15px);
     margin: 5px;
-    font-style: italic;
     font-weight: normal;
     line-height: 20px;
     padding: 10px;
     border-radius: 20px;
+    font-weight: lighter;
 
 }
 
 .answer:hover {
 
     background-color: var(--compliment);
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
 
+}
+
+.extra {
+
+    border-top: 3px solid var(--compliment2);
+    text-align: center;
+    padding: 15px;
+    font-size: 2.7vh;
+    font-style: oblique;
+    font-weight: lighter;
 }
 
 /*  main styles end */
