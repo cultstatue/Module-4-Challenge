@@ -1,0 +1,146 @@
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+  }
+  
+:root {
+
+    --colorone: #FAF2FF;
+    --colortwo: #5A207F;
+    --colorthree: #FEFBFF;
+    --compliment: #FCDDAA;
+    --compliment2: #F3B144;    
+
+  }
+
+body {
+
+    background-color: var(--colorone);
+    color: var(--colortwo);
+    font-family: Helvetica, Arial, sans-serif;
+
+}
+
+/* header styles start */
+
+header {
+
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+header h1 {
+
+    padding: 10px;
+    font-weight: normal;
+    font-size: 3.5vh;
+    text-shadow: 1px 1px #5A207F;
+
+}
+
+/* header style ends */
+
+/* main styles begin */
+
+.page-content {
+
+    display: flex;
+    flex-direction : column;
+    align-items: center;
+    flex: wrap;
+    margin: 30px;
+
+}
+
+.content-wrapper {
+
+    width: 50%;
+    background-color: var(--colorthree);
+    border-radius: 20px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+    padding: 15px;
+
+}
+
+.titles-wrapper {
+
+    display: flex;
+    flex: wrap;
+    justify-content: space-between;
+    
+}
+
+.wrapper-headings {
+
+    padding: 10px;
+    font-weight: 300;
+    font-size: 1.7vh;
+
+}
+
+.quiz-container {
+
+    display: flex;
+    flex: wrap;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+}
+
+.questions-title {
+
+    padding: 15px;
+    flex: 1;
+    line-height: 40px;
+    font-weight: lighter;
+    font-size: 2.3vh;
+
+}
+
+.answers-list {
+
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    flex: 100%;
+    margin-top: 30px;
+
+}
+
+.answer {
+
+    flex:0 1 calc(50% - 15px);
+    margin: 5px;
+    font-style: italic;
+    font-weight: normal;
+    line-height: 20px;
+    padding: 10px;
+    border-radius: 20px;
+
+}
+
+.answer:hover {
+
+    background-color: var(--compliment);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+
+}
+
+/*  main styles end */
+
+/* footer styles begin */
+
+footer {
+
+    text-align: center;
+    padding: 30px;
+    font-weight: lighter;
+    font-style: oblique;
+    font-size: 1.5vh;
+    word-spacing: 5px;
+  
+}
