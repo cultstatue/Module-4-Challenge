@@ -24,6 +24,35 @@ body {
 
 }
 
+button {
+
+    outline: none;
+    border: none;
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: var(--compliment2);
+    border-radius: 15px;
+    font-weight: lighter;
+    box-shadow: 0 3px var(--colortwo);
+    letter-spacing: 1px;
+    font-size: 1.3vh;
+
+}
+
+button:hover {
+
+    box-shadow: 0 2px var(--colortwo);
+    top: -2px;
+    
+}
+
+button:active {
+
+    box-shadow: 0 0px var(--colortwo);
+    top: 0;
+
+}
+
 /* header styles start */
 
 header {
@@ -72,6 +101,18 @@ header h1 {
     flex: wrap;
     justify-content: space-between;
     border-bottom: 3px solid var(--compliment2);
+    
+}
+
+.high-scores:hover {
+
+    font-style: italic;
+
+}
+
+.high-score:active {
+
+    font-weight: bolder;
     
 }
 
@@ -129,6 +170,12 @@ header h1 {
 
     background-color: var(--compliment);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+
+}
+
+.answer:active {
+
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.6);
 
 }
 
