@@ -3,6 +3,7 @@ var questionContainer = document.querySelector("#question-container");
 var questionEl = document.querySelector("#question");
 var answersContainer = document.querySelector("#answers-container");
 var extraWrapper = document.querySelector("#extra-wrapper");
+var buttonWrapper = document.querySelector("#button-box");
 
 
 var totalScore =[];
@@ -72,6 +73,8 @@ var questions = [
 
 ]
 
+
+// function to generate questions and answers
 var createQuestion = function(questionIndex) {
 
   // create question
@@ -81,64 +84,44 @@ var createQuestion = function(questionIndex) {
 
   questionContainer.appendChild(questionEl);
 
-  //create option A
-  var answerElA = document.createElement("div");
-  answerElA.textContent = questions[questionIndex].options[0]
-  answerElA.className = "answer";
+  //  generate answer options
+  for (i = 0; i < questions[questionIndex].options.length; i ++) {
 
-  // listen for clicking A
-  answersContainer.appendChild(answerElA);
-  answerElA.addEventListener("click", function() {
+    var answerEl = document.createElement("div");
+    answerEl.textContent = questions[questionIndex].options[i]
+    answerEl.className = "answer";
+    answersContainer.appendChild(answerEl);
 
-    console.log("click A");
+  }
+  
+  // add click events to answers, check if correct or not, and keep score.
+  answersContainer.addEventListener("click", function(event) {
 
-  })
+    if (event.target.matches(".answer")) {
 
-  // create option B
-  var answerElB = document.createElement("div");
-  answerElB.textContent = questions[questionIndex].options[1]
-  answerElB.className = "answer";
+      var chosenAnswer = event.target.textContent;
 
-  answersContainer.appendChild(answerElB);
+      var rightWrong = document.querySelector(".extra");
 
-  // listen for click b
-  answersContainer.appendChild(answerElB);
-  answerElB.addEventListener("click", function() {
+      if (chosenAnswer === questions[questionIndex].answer) {
 
-    console.log("click B");
+        console.log("correct");
+        rightWrong.textContent = "correct!";
+        totalScore.push(1);
+        console.log(totalScore);
 
-  })
+      }
+      else {
 
-  // create option C
-  var answerElC = document.createElement("div");
-  answerElC.textContent = questions[questionIndex].options[2]
-  answerElC.className = "answer";
+        console.log("incorrect");
+        rightWrong.textContent = "incorrect!";
+        console.log(totalScore);
 
-  answersContainer.appendChild(answerElC);
+      }
 
-  // listen for click c
-  answersContainer.appendChild(answerElC);
-  answerElC.addEventListener("click", function() {
+    };
 
-    console.log("click C");
-
-  })
-
-
-  // create option D
-  var answerElD = document.createElement("div");
-  answerElD.textContent = questions[questionIndex].options[3]
-  answerElD.className = "answer";
-
-  answersContainer.appendChild(answerElD);
-
-  // listen for click D
-  answersContainer.appendChild(answerElD);
-  answerElD.addEventListener("click", function() {
-
-    console.log("click D");
-
-  })
+  }, {once : true});
 
   
 }
@@ -153,7 +136,7 @@ var startQuiz = function () {
 
   // remove instructions and start button
   questionContainer.removeChild(initialText);
-  questionContainer.removeChild(startButton);
+  buttonWrapper.removeChild(startButton);
   
   // create "extra" div
   var createExtra = document.createElement("div");
@@ -163,14 +146,14 @@ var startQuiz = function () {
   // create restart button
   var restartButton = document.createElement("button");
   restartButton.textContent = "restart";
-  createExtra.appendChild(restartButton);
+  buttonWrapper.appendChild(restartButton);
 
   restartButton.addEventListener("click", restartQuiz);
 
   // create next button
   var nextButton = document.createElement("button");
   nextButton.textContent = "next";
-  createExtra.appendChild(nextButton);
+  buttonWrapper.appendChild(nextButton);
 
   
 
@@ -197,7 +180,7 @@ questionContainer.appendChild(initialText);
 
 var startButton = document.createElement("button");
 startButton.textContent = "start";
-questionContainer.appendChild(startButton);
+buttonWrapper.appendChild(startButton);
 
 startButton.addEventListener("click", function() {
 
