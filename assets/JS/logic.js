@@ -1,6 +1,5 @@
 var quizContainer = document.querySelector("#quiz-container");
 var questionContainer = document.querySelector("#question-container");
-var questionEl = document.querySelector("#question");
 var answersContainer = document.querySelector("#answers-container");
 var extraWrapper = document.querySelector("#extra-wrapper");
 var buttonWrapper = document.querySelector("#button-box");
@@ -73,9 +72,34 @@ var questions = [
 
 ]
 
+//function to add up numbers in total score array
+function getSum(array){
+
+  return array.reduce(function(sum, value) {
+
+    return sum + value;
+
+  }, 0);
+
+}
+// function to remove all parents children
+var removeChildren = function (parent) {
+
+  while(parent.firstChild) {
+
+    parent.removeChild(parent.firstChild);
+
+  }
+
+}
 
 // function to generate questions and answers
 var createQuestion = function(questionIndex) {
+
+  // create "extra" div
+  var createExtra = document.createElement("div");
+  createExtra.className = "extra";
+  extraWrapper.appendChild(createExtra);
 
   // create question
   var questionEl = document.createElement("h3");
@@ -108,14 +132,14 @@ var createQuestion = function(questionIndex) {
         console.log("correct");
         rightWrong.textContent = "correct!";
         totalScore.push(1);
-        console.log(totalScore);
+        console.log(getSum(totalScore));
 
       }
       else {
 
         console.log("incorrect");
         rightWrong.textContent = "incorrect!";
-        console.log(totalScore);
+        console.log(getSum(totalScore));
 
       }
 
@@ -123,25 +147,21 @@ var createQuestion = function(questionIndex) {
 
   }, {once : true});
 
-  
 }
 
+// function to restart the entire quiz
 var restartQuiz = function () {
 
   window.location.reload();
 
 }
 
+// function to start the quiz
 var startQuiz = function () {
 
   // remove instructions and start button
   questionContainer.removeChild(initialText);
   buttonWrapper.removeChild(startButton);
-  
-  // create "extra" div
-  var createExtra = document.createElement("div");
-  createExtra.className = "extra";
-  extraWrapper.appendChild(createExtra);
 
   // create restart button
   var restartButton = document.createElement("button");
@@ -150,19 +170,35 @@ var startQuiz = function () {
 
   restartButton.addEventListener("click", restartQuiz);
 
+  var currentQuestion = 0
+
   // create next button
   var nextButton = document.createElement("button");
   nextButton.textContent = "next";
   buttonWrapper.appendChild(nextButton);
 
-  
+  nextButton.addEventListener("click", function(event) {
 
+    removeChildren(questionContainer);
+    removeChildren(answersContainer);
+    removeChildren(extraWrapper);
 
-  
+    
+    if (currentQuestion < questions.length){
 
+      createQuestion(currentQuestion ++);
 
+    }
+    else {
 
-  createQuestion(0);
+      console.log("end of quiz")
+      
+    }
+   
+
+  })
+
+  createQuestion(currentQuestion);
 
 }
 
