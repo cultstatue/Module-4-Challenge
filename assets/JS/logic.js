@@ -4,7 +4,6 @@ var answersContainer = document.querySelector("#answers-container");
 var extraWrapper = document.querySelector("#extra-wrapper");
 var buttonWrapper = document.querySelector("#button-box");
 
-
 var totalScore =[];
 
 var questions = [
@@ -156,6 +155,31 @@ var restartQuiz = function () {
 
 }
 
+// function to handle the quiz ending
+var gameEnd = function() {
+
+  var finalScore = getSum(totalScore);
+
+  var endText = document.createElement("h3");
+  endText.innerHTML = "Game over!" + "<br />" + "Your final score is: " + finalScore;
+  endText.className = "questions-title";
+
+  questionContainer.appendChild(endText);
+ 
+  console.log("end of quiz")
+
+  var recordScoreButton = document.createElement("button");
+  recordScoreButton.textContent ="Submit your high score";
+  buttonWrapper.appendChild(recordScoreButton);
+
+  recordScoreButton.addEventListener("click", function() {
+
+    console.log("click");
+    
+  })
+
+}
+
 // function to start the quiz
 var startQuiz = function () {
 
@@ -169,7 +193,8 @@ var startQuiz = function () {
   buttonWrapper.appendChild(restartButton);
 
   restartButton.addEventListener("click", restartQuiz);
-
+  
+  // define first spot in questions array
   var currentQuestion = 0
 
   // create next button
@@ -177,13 +202,13 @@ var startQuiz = function () {
   nextButton.textContent = "next";
   buttonWrapper.appendChild(nextButton);
 
+  // crerate logic for next button to advance through questions array
   nextButton.addEventListener("click", function(event) {
 
     removeChildren(questionContainer);
     removeChildren(answersContainer);
     removeChildren(extraWrapper);
 
-    
     if (currentQuestion < questions.length){
 
       createQuestion(currentQuestion ++);
@@ -191,13 +216,15 @@ var startQuiz = function () {
     }
     else {
 
-      console.log("end of quiz")
-      
+      buttonWrapper.removeChild(nextButton);
+
+      gameEnd();
+
     }
-   
 
   })
 
+  //display first question
   createQuestion(currentQuestion);
 
 }
