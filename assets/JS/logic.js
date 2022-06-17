@@ -3,13 +3,15 @@ var questionContainer = document.querySelector("#question-container");
 var answersContainer = document.querySelector("#answers-container");
 var extraWrapper = document.querySelector("#extra-wrapper");
 var buttonWrapper = document.querySelector("#button-box");
+var timerContainer = document.querySelector("#timer");
+
+var startTime = 5;
 
 var totalScore =[];
 
 var questions = [
 
     {
-        numb: 1,
         question: "lorem ipsum gbhhfd cutls fjdshj",
         answer: "a",
         options: [
@@ -21,7 +23,6 @@ var questions = [
 
     },
     {
-        numb: 1,
         question: "lorem ipsum gbhhfd cutls fjdshj",
         answer: "b",
         options: [
@@ -33,7 +34,6 @@ var questions = [
 
     },
     {
-        numb: 1,
         question: "What does HTML stand fodfsgfdgfdr?",
         answer: "Hyper Text Markup Language",
         options: [
@@ -45,7 +45,6 @@ var questions = [
 
     },
     {
-        numb: 1,
         question: "What gtrwgrewreoes HTML stand for?",
         answer: "Hyper Text Markup Language",
         options: [
@@ -57,7 +56,6 @@ var questions = [
 
     },
     {
-        numb: 1,
         question: "What doestreqtrtqre HTML stand for?",
         answer: "Hyper Text Markup Language",
         options: [
@@ -71,6 +69,23 @@ var questions = [
 
 ]
 
+var displayTimer = function() { setInterval(() => {
+
+  timerContainer.textContent = startTime;
+
+  startTime -= 1;
+
+  if (startTime === -1) {
+
+    clearInterval(displayTimer);
+
+    gameEnd();
+
+  }
+   
+ }, 1000);
+}
+ 
 //function to add up numbers in total score array
 function getSum(array){
 
@@ -81,6 +96,7 @@ function getSum(array){
   }, 0);
 
 }
+
 // function to remove all parents children
 var removeChildren = function (parent) {
 
@@ -175,7 +191,7 @@ var gameEnd = function() {
   recordScoreButton.addEventListener("click", function() {
 
     console.log("click");
-    
+
   })
 
 }
@@ -229,10 +245,6 @@ var startQuiz = function () {
 
 }
 
-
-
-
-
 // landing text
 var initialText = document.createElement("h3");
 initialText.textContent = "lorem uinspid ahfghds ahdhsg";
@@ -249,6 +261,7 @@ startButton.addEventListener("click", function() {
 
   console.log("start clicked");
   startQuiz();
+  displayTimer();
 
 })
 
