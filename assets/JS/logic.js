@@ -152,18 +152,32 @@ var restartQuiz = function () {
 var highScoreRecorder = function(event) {
 
   event.preventDefault();
+  
+  var nameInputForm = document.querySelector("#name-form");
 
   var playerNameInput = document.querySelector("input[name='player-name']").value;
 
   if (!playerNameInput) {
 
-    alert("Please enter a name.");
+    alert("Please enter your initials.");
     return false;
 
   }
- 
 
+  nameInputForm.reset();
+  
+  var playerData = {
+
+    name: playerNameInput,
+    score:getSum(totalScore)
+
+  }
+
+  playerInfo.push(playerData);
+ 
+  localStorage.setItem("player", JSON.stringify(playerInfo));
 }
+
 
 // function to handle the quiz ending
 var gameEnd = function() {
@@ -183,7 +197,7 @@ var gameEnd = function() {
   console.log("end of quiz")
 
   var formInput = document.createElement("div")
-  formInput.innerHTML = "<form id='name-form'><input type='text' name='player-name' class='text-input' placeholder='Enter Name Here' /> <button id='save-name' type='submit'> Record High Score </button> </form>"
+  formInput.innerHTML = "<form id='name-form'><input type='text' name='player-name' class='text-input' placeholder='Initials Here' /> <button id='save-name' type='submit'> Record High Score </button> </form>"
   
   questionContainer.appendChild(formInput);
   formInput.addEventListener("submit", highScoreRecorder);
