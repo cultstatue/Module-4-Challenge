@@ -2,12 +2,15 @@ var quizContainer = document.querySelector("#quiz-container");
 var questionContainer = document.querySelector("#question-container");
 var answersContainer = document.querySelector("#answers-container");
 var extraWrapper = document.querySelector("#extra-wrapper");
+var extraDiv = document.querySelector("#extra-div");
 var buttonWrapper = document.querySelector("#button-box");
 var timerContainer = document.querySelector("#timer");
 
-var startTime = 5;
+var startTime = 60;
 
 var totalScore =[];
+
+var playerInfo = [];
 
 var questions = [
 
@@ -69,23 +72,6 @@ var questions = [
 
 ]
 
-var displayTimer = function() { setInterval(() => {
-
-  timerContainer.textContent = startTime;
-
-  startTime -= 1;
-
-  if (startTime === -1) {
-
-    clearInterval(displayTimer);
-
-    gameEnd();
-
-  }
-   
- }, 1000);
-}
- 
 //function to add up numbers in total score array
 function getSum(array){
 
@@ -111,11 +97,6 @@ var removeChildren = function (parent) {
 // function to generate questions and answers
 var createQuestion = function(questionIndex) {
 
-  // create "extra" div
-  var createExtra = document.createElement("div");
-  createExtra.className = "extra";
-  extraWrapper.appendChild(createExtra);
-
   // create question
   var questionEl = document.createElement("h3");
   questionEl.textContent = questions[questionIndex].question;
@@ -140,21 +121,18 @@ var createQuestion = function(questionIndex) {
 
       var chosenAnswer = event.target.textContent;
 
-      var rightWrong = document.querySelector(".extra");
-
       if (chosenAnswer === questions[questionIndex].answer) {
 
         console.log("correct");
-        rightWrong.textContent = "correct!";
-        totalScore.push(1);
+        totalScore.push(10);
         console.log(getSum(totalScore));
 
       }
-      else {
+      else if (chosenAnswer !== questions[questionIndex].answer) {
 
         console.log("incorrect");
-        rightWrong.textContent = "incorrect!";
         console.log(getSum(totalScore));
+        startTime -= 5;
 
       }
 
@@ -171,8 +149,28 @@ var restartQuiz = function () {
 
 }
 
+var highScoreRecorder = function(event) {
+
+  event.preventDefault();
+
+  var playerNameInput = document.querySelector("input[name='player-name']").value;
+
+  if (!playerNameInput) {
+
+    alert("Please enter a name.");
+    return false;
+
+  }
+ 
+
+}
+
 // function to handle the quiz ending
 var gameEnd = function() {
+
+  clearInterval(timer);
+
+  extraWrapper.textContent = "play again?";
 
   var finalScore = getSum(totalScore);
 
@@ -184,15 +182,11 @@ var gameEnd = function() {
  
   console.log("end of quiz")
 
-  var recordScoreButton = document.createElement("button");
-  recordScoreButton.textContent ="Submit your high score";
-  buttonWrapper.appendChild(recordScoreButton);
-
-  recordScoreButton.addEventListener("click", function() {
-
-    console.log("click");
-
-  })
+  var formInput = document.createElement("div")
+  formInput.innerHTML = "<form id='name-form'><input type='text' name='player-name' class='text-input' placeholder='Enter Name Here' /> <button id='save-name' type='submit'> Record High Score </button> </form>"
+  
+  questionContainer.appendChild(formInput);
+  formInput.addEventListener("submit", highScoreRecorder);
 
 }
 
@@ -213,26 +207,18 @@ var startQuiz = function () {
   // define first spot in questions array
   var currentQuestion = 0
 
-  // create next button
-  var nextButton = document.createElement("button");
-  nextButton.textContent = "next";
-  buttonWrapper.appendChild(nextButton);
-
-  // crerate logic for next button to advance through questions array
-  nextButton.addEventListener("click", function(event) {
+  // create logic for clicking answers to advance through array of questions
+  answersContainer.addEventListener("click", function(event) {
 
     removeChildren(questionContainer);
     removeChildren(answersContainer);
-    removeChildren(extraWrapper);
-
+    
     if (currentQuestion < questions.length){
 
       createQuestion(currentQuestion ++);
 
     }
     else {
-
-      buttonWrapper.removeChild(nextButton);
 
       gameEnd();
 
@@ -261,7 +247,20 @@ startButton.addEventListener("click", function() {
 
   console.log("start clicked");
   startQuiz();
-  displayTimer();
+  timer = setInterval (function() {
+
+    startTime -= 1;
+
+    if(startTime === 0) {
+  
+      clearInterval(timer);
+      gameEnd();
+  
+    }
+  
+    timerContainer.textContent = startTime;
+  
+  }, 1000);
 
 })
 
