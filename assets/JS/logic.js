@@ -2,7 +2,6 @@ var quizContainer = document.querySelector("#quiz-container");
 var questionContainer = document.querySelector("#question-container");
 var answersContainer = document.querySelector("#answers-container");
 var extraWrapper = document.querySelector("#extra-wrapper");
-var extraDiv = document.querySelector("#extra-div");
 var buttonWrapper = document.querySelector("#button-box");
 var timerContainer = document.querySelector("#timer");
 var viewHighScore = document.querySelector("#view-high-scores");
@@ -16,60 +15,115 @@ var playerInfo = [];
 var questions = [
 
     {
-        question: "lorem ipsum gbhhfd cutls fjdshj",
-        answer: "a",
+        question: "Which is an example of a semantic HTML element?",
+        answer: "A: <section>",
         options: [
-          "c",
-          "a",
-          "b",
-          "d"
+          "A: <section>",
+          "B: <div>",
+          "B: <div>",
+          "D: <span>"
         ]
 
     },
     {
-        question: "lorem ipsum gbhhfd cutls fjdshj",
-        answer: "b",
+        question: "Style Sheet 1 is referenced in an HTML document after style sheet 2. Which style sheet’s styles will apply to the document?",
+        answer: "C: style sheet 1",
         options: [
-          "b",
-          "Hyper Text Markup Language",
-          "Hyper Text Multiple Language",
-          "Hyper Tool Multi Language"
+          "A: style sheet 2",
+          "B: neither",
+          "C: style sheet 1",
+          "D: Order will have no effect"
         ]
 
     },
     {
-        question: "What does HTML stand fodfsgfdgfdr?",
-        answer: "Hyper Text Markup Language",
+        question: "What is the difference between a class and an ID?",
+        answer: "D: none of the provided answers are correct",
         options: [
-          "Hyper Text Preprocessor",
-          "Hyper Text Markup Language",
-          "Hyper Text Multiple Language",
-          "Hyper Tool Multi Language"
+          "A: an ID can be used more than once",
+          "B: classes can only be used once",
+          "C: classes cannot be referenced in javascript",
+          "D: none of the provided answers are correct"
         ]
 
     },
     {
-        question: "What gtrwgrewreoes HTML stand for?",
-        answer: "Hyper Text Markup Language",
+        question: "What are media queries?",
+        answer: "A: Styles that dynamically change a website based on the device/screen size accessing the page",
         options: [
-          "Hyper Text Preprocessor",
-          "Hyper Text Markup Language",
-          "Hyper Text Multiple Language",
-          "Hyper Tool Multi Language"
+          "A: Styles that dynamically change a website based on the device/screen size accessing the page",
+          "B: A tool that racks what devices are accessing a webpage for statistical reasons",
+          "C: An API that locally stores data in the user’s browser",
+          "D: A standardized list of devices approved for accessing websites"
         ]
 
     },
     {
-        question: "What doestreqtrtqre HTML stand for?",
-        answer: "Hyper Text Markup Language",
+        question: "What is the purpose of using flexbox while styling a document?",
+        answer: "B: It allows creation of responsive site design",
         options: [
-          "Hyper Text Preprocessor",
-          "Hyper Text Markup Language",
-          "Hyper Text Multiple Language",
-          "Hyper Tool Multi Language"
+          "A: It allows multiple style sheets to be used at once",
+          "B: It allows creation of responsive site design",
+          "C: Enables the use of javascript on a webpage",
+          "D: none of the provided answers are correct"
         ]
 
-    }
+    },
+    {
+      question: "How can we determine if a variable in javascript is global/public?",
+      answer: "D: Both A and C are correct",
+      options: [
+        "A: It is defined outside of any function or closed brackets",
+        "B: It is defined within a function using it",
+        "C: It is information defined sans the var prefix",
+        "D: Both A and C are correct"
+      ]
+
+  },
+  {
+    question: "Which is an example of string type data?",
+    answer: "A: Someone’s name entered in an input field",
+    options: [
+      "A: Someone’s name entered in an input field",
+      "B: A list of prime numbers",
+      "C: Wether or not a user selected a a box agreeing to terms of service",
+      "D: Someone's birth month as represented by a two digit number"
+    ]
+
+},
+{
+  question: "What API can we use to save data in a user’s browser?",
+  answer: "C: localStorage",
+  options: [
+    "A: Media Queries",
+    "B: jQuery",
+    "C: localStorage",
+    "D: Bootstrap"
+  ]
+
+},
+{
+  question: "Do you need to use jQuery in order to manipulate the DOM?",
+  answer: "A: No, it can be done with vanilla javascript",
+  options: [
+    "A: No, it can be done with vanilla javascript",
+    "B: No, it can be done with Bootstrap",
+    "C: Yes, but only if disconnected from internet access",
+    "D: Yes, but only in tangent with Bootstrap or a similar library"
+  ]
+
+},
+{
+  question: "What is Bootstrap?",
+  answer: "C: A CSS library of pre built styles",
+  options: [
+    "A: A specialized tool that generates HTML on demand",
+    "B: A library of javascript functions",
+    "C: A CSS library of pre built styles",
+    "D: A CSS library of styles of standardized use on the web"
+  ]
+
+}
 
 ]
 
@@ -126,7 +180,7 @@ var createQuestion = function(questionIndex) {
 
         console.log("correct");
         totalScore.push(10);
-        console.log(getSum(totalScore));
+        console.log(getSum(totalScore))
 
       }
       else if (chosenAnswer !== questions[questionIndex].answer) {
@@ -183,6 +237,9 @@ var highScoreRecorder = function(event) {
 
 // function to handle the quiz ending
 var gameEnd = function() {
+
+  removeChildren(questionContainer);
+  removeChildren(answersContainer);
 
   clearInterval(timer);
 
@@ -275,7 +332,7 @@ var getHighScores = function() {
 
 // landing text
 var initialText = document.createElement("h3");
-initialText.textContent = "lorem uinspid ahfghds ahdhsg";
+initialText.textContent = "60 seconds to answer 10 questions. For every wrong answer five seconds will be deducted the running timer. Click the start button when you're ready.";
 initialText.className = "questions-title";
 
 questionContainer.appendChild(initialText);
