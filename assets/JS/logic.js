@@ -5,6 +5,7 @@ var extraWrapper = document.querySelector("#extra-wrapper");
 var extraDiv = document.querySelector("#extra-div");
 var buttonWrapper = document.querySelector("#button-box");
 var timerContainer = document.querySelector("#timer");
+var viewHighScore = document.querySelector("#view-high-scores");
 
 var startTime = 60;
 
@@ -149,6 +150,7 @@ var restartQuiz = function () {
 
 }
 
+// function to store high score and initials in local storage
 var highScoreRecorder = function(event) {
 
   event.preventDefault();
@@ -197,7 +199,7 @@ var gameEnd = function() {
   console.log("end of quiz")
 
   var formInput = document.createElement("div")
-  formInput.innerHTML = "<form id='name-form'><input type='text' name='player-name' class='text-input' placeholder='Initials Here' /> <button id='save-name' type='submit'> Record High Score </button> </form>"
+  formInput.innerHTML = "<form id='name-form'><input type='text'  maxlength='2' name='player-name' class='text-input' placeholder='Initials Here' /> <button id='save-name' type='submit'> Record High Score </button> </form>"
   
   questionContainer.appendChild(formInput);
   formInput.addEventListener("submit", highScoreRecorder);
@@ -245,6 +247,32 @@ var startQuiz = function () {
 
 }
 
+
+var getHighScores = function() {
+
+  var savedPlayerInfo = localStorage.getItem("player");
+
+  if (!savedPlayerInfo) {
+
+    alert("No high scores saved yet");
+    return false;
+    
+  }
+  
+  savedPlayerInfo = JSON.parse(savedPlayerInfo);
+  console.log(savedPlayerInfo);
+
+  var playerInfo = {
+
+    name: savedPlayerInfo[0].name,
+    score: savedPlayerInfo[0].score
+
+  }
+
+  alert(playerInfo.name + " has a high score of " + playerInfo.score);
+  
+}
+
 // landing text
 var initialText = document.createElement("h3");
 initialText.textContent = "lorem uinspid ahfghds ahdhsg";
@@ -279,7 +307,6 @@ startButton.addEventListener("click", function() {
 })
 
 
-
-
+viewHighScore.addEventListener("click", getHighScores)
 
 
