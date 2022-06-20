@@ -256,7 +256,7 @@ var gameEnd = function() {
   console.log("end of quiz")
 
   var formInput = document.createElement("div")
-  formInput.innerHTML = "<form id='name-form'><input type='text'  maxlength='2' name='player-name' class='text-input' placeholder='Initials Here' /> <button id='save-name' type='submit'> Record High Score </button> </form>"
+  formInput.innerHTML = "<form id='name-form'><input type='text'  maxlength='2' name='player-name' class='text-input' placeholder='Initials Here' /> <button id='save-name' type='submit'> Record Score </button> </form>"
   
   questionContainer.appendChild(formInput);
   formInput.addEventListener("submit", highScoreRecorder);

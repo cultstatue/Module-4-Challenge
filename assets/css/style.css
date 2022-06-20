@@ -196,6 +196,20 @@ header h1 {
 
 }
 
+
+form input {
+
+    outline: none;
+    border: none;
+    padding: 12px;
+    margin: 10px;
+    width: 25%;
+    font-size: 1.0rem;
+    border: 2px solid;
+    border-radius: 12px;
+
+  }
+
 /*  main styles end */
 
 /* footer styles begin */
